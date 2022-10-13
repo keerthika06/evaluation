@@ -7,7 +7,7 @@ const userSchema = new Schema({
         type: Number
     },
     MPin : {
-        type: Number
+        type: String
     }
 },{timestamps : true})
 

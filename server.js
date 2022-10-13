@@ -30,5 +30,5 @@ app.listen(PORT,()=>{
 })
 
 app.use('/api/user', userRoute)
-app.use('/api/register',AuthRoute)
+app.use('/api',AuthRoute)
 
