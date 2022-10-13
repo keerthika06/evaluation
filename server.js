@@ -4,6 +4,8 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const userRoute = require('./routes/user')
 const AuthRoute = require('./routes/auth')
+//const authenticate =require('./middleware/authenticate')
+
 
 mongoose.connect('mongodb://localhost:27017/eval')
 const db = mongoose.connection
@@ -28,7 +30,7 @@ app.listen(PORT,()=>{
     console.log(`server running on port ${PORT}`)
 
 })
-
+//app.use('/api/login',authenticate)
 app.use('/api/user', userRoute)
 app.use('/api',AuthRoute)
 
