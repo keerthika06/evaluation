@@ -49,10 +49,15 @@ const login = (req,res,next)=>{
                     })
                 }
                 if(result){
-                    let token = jwt.sign({MobileNumber : user.MobileNumber}, 'secretValue',{expiresIn: '1h'})
+                    
+                    
+                    let token = jwt.sign({MobileNumber : user.MobileNumber}, 'secretValue',{expiresIn: '30s'})
+                    let refreshtoken = jwt.sign({MobileNumber : user.MobileNumber}, 'refreshtokensecret',{expiresIn: '48h'})
+                    
                     res.json({
                         message: 'Login Succesful!',
-                        token
+                        token,
+                        refreshtoken
                     })
 
                 }
@@ -71,6 +76,28 @@ const login = (req,res,next)=>{
     })
 }
 
+
+const refreshToken = (treq,res,next)=> {
+    const refreshToken = req.body.refreshToken
+    jwt.verify(refreshToken, 'refreshtokensecret', function(err,decode) {
+        if(err){
+            res.status(400).json({
+                err
+            })
+        }
+        else{
+            let token = jwt.sign({name : decode.name}, 'thesecrettoken', {expiresIn : '30s'})
+            let refreshToken = req.body.refreshToken
+            res.status(200).json({
+                message: "Token refreshed sucessfully ",
+                token,
+                refreshToken
+            })
+       
+        }
+    })
+}
+
 module.exports = {
-    register, login
+    register, login , refreshToken
 }
