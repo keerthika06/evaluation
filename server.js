@@ -2,7 +2,10 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+
+
 const userRoute = require('./routes/user')
+const siteRoute = require('./routes/sites')
 const AuthRoute = require('./routes/auth')
 //const authenticate =require('./middleware/authenticate')
 
@@ -30,7 +33,10 @@ app.listen(PORT,()=>{
     console.log(`server running on port ${PORT}`)
 
 })
+
+
 //app.use('/api/login',authenticate)
 app.use('/api/user', userRoute)
 app.use('/api',AuthRoute)
+app.use('/api/site',siteRoute)
 

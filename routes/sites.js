@@ -1,9 +1,17 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/', authenticate, siteController.index)
-router.post('/show',siteController.show)
-router.post('/store',siteController.store)
-router.post('/update',siteController.update)
+const siteController = require('../controllers/siteController')
 
-module.exports = router
+router.get('/',siteController.index)
+// to find one
+router.post('/show',siteController.show)
+// add
+router.post('/store',siteController.store)
+//router.post('/reset',siteController.reset)
+router.put('/update',siteController.update)
+
+
+module.exports = router 
+//sites
+//index,show,store,update

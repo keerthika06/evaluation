@@ -6,6 +6,6 @@ const authenticate = require('../middleware/authenticate')
 router.get('/', authenticate, userController.index)
 router.post('/show',userController.show)
 router.post('/store',userController.store)
-router.post('/update',userController.update)
+router.put('/update',userController.update)
 
-module.exports = router
+module.exports = router 

@@ -19,7 +19,7 @@ const index = (req,res,next)=>{
 //show single user
 const show = (req, res, next)=>{
     let MobileNumber = req.body.MobileNumber
-    User.findById(MobileNumber)
+    User.findOne(MobileNumber)
     .then(response => {
         res.json({
             response
@@ -57,7 +57,7 @@ const update = (req,res,next) =>{
         MobileNumber : req.body.MobileNumber,
         MPin : req.body.MPin
     })
-    User.findByIdAndUpdate(MobileNumber, {$set: updatedData})
+    User.findOneAndUpdate(MobileNumber,  updatedData)
     .then(()=> {
         res.json({
             message : 'user added successfully'
