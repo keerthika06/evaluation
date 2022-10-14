@@ -11,6 +11,9 @@ router.post('/store',siteController.store)
 //router.post('/reset',siteController.reset)
 router.put('/update',siteController.update)
 
+//updaaaaaaaaaaaaaateeeeeeeeeeee
+router.put('/:id',siteController.updateSiteById)
+
 
 module.exports = router 
 //sites

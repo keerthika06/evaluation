@@ -1,6 +1,7 @@
 //const user = require('../models/user')
 const {response} = require('express')
 const Sites = require('../models/sites')
+const Cryptr = require('cryptr');
 
 //show the list of employees
 const index = (req,res,next)=>{
@@ -33,16 +34,33 @@ const show = (req, res, next)=>{
         message: 'AN error occured'
     })
 })
-
 }
+// updattttttttttttttttttttttteeeeeeeeeeee
+const updateSiteById = async (req,res) =>{
+    try {
+        const response = await Sites.findByIdAndUpdate(req.params.id, req.body)
+        res.send(response)
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+
+
+
+
 //to add sites
 const store = async (req, res, next)=>{
+
+    const cryptr = new Cryptr(process.env.SECRET);
+    const encryptedString = cryptr.encrypt(req.body.SitePassword);
     let site = new Sites({
         URL: req.body.URL,
         SiteName: req.body.SiteName,
         Sector: req.body.Sector,
         UserName : req.body.UserName,
-        SitePassword:req.body.SitePassword,
+        SitePassword: encryptedString,
         Notes : req.body.Notes
         
     })
@@ -89,6 +107,6 @@ const update = (req,res,next) =>{
     })
 }
 module.exports = {
-    index,show,store,update
+    index,show,store,update,updateSiteById
 
 }
