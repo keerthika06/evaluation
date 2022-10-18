@@ -23,7 +23,7 @@ const index = (req,res,next)=>{
 //show single user to find 
 const show = (req, res, next)=>{
     let SiteName = req.body.SiteName
-    Sites.findOne(SiteName)
+    Sites.findOne({SiteName})
     .then(response => {
         res.json({
             response

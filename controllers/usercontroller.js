@@ -19,7 +19,7 @@ const index = (req,res,next)=>{
 //show single user
 const show = (req, res, next)=>{
     let MobileNumber = req.body.MobileNumber
-    User.findOne(MobileNumber)
+    User.findOne({MobileNumber})
     .then(response => {
         res.json({
             response
@@ -28,8 +28,18 @@ const show = (req, res, next)=>{
         res.json({
         message: 'AN error occured'
     })
+
+    // b.collection('movies').findOneAndUpdate(req.body.title,{
+    //     title: 'Avengers',
+    // },(err, result) => {
+    //     if (err) {
+    //         res.send({
+    //             'error': 'An error has occured'
+    //         });
+    //     } else {
+    //         res.send(result.ops[0]);
 })
-})
+}) 
 }
 const store = async (req, res, next)=>{
     let user = new User({

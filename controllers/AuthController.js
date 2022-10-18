@@ -51,7 +51,7 @@ const login = (req,res,next)=>{
                 if(result){
                     
                     
-                    let token = jwt.sign({MobileNumber : user.MobileNumber}, 'secretValue',{expiresIn: '30s'})
+                    let token = jwt.sign({MobileNumber : user.MobileNumber}, 'secretValue',{expiresIn: '30h'})
                     let refreshtoken = jwt.sign({MobileNumber : user.MobileNumber}, 'refreshtokensecret',{expiresIn: '48h'})
                     
                     res.json({
@@ -86,7 +86,7 @@ const refreshToken = (treq,res,next)=> {
             })
         }
         else{
-            let token = jwt.sign({name : decode.name}, 'thesecrettoken', {expiresIn : '30s'})
+            let token = jwt.sign({name : decode.name}, 'thesecrettoken', {expiresIn : '30h'})
             let refreshToken = req.body.refreshToken
             res.status(200).json({
                 message: "Token refreshed sucessfully ",
